@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="raiz" prefHeight="720.0" prefWidth="1280.0" spacing="10.0" stylesheets="@../estilos/VentanaClientes.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaAlquileres">
+   <children>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="1280.0" spacing="1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Button fx:id="btVolver" contentDisplay="TOP" mnemonicParsing="false" onAction="#volver" prefHeight="2000.0" prefWidth="2000.0" text="Volver">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/usuario.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btInsertar" contentDisplay="TOP" mnemonicParsing="false" onAction="#insertar" prefHeight="2000.0" prefWidth="2000.0" text="Insertar">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/coche.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btDevolver" contentDisplay="TOP" mnemonicParsing="false" onAction="#devolver" prefHeight="2000.0" prefWidth="2000.0" text="Devolver">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/llave-del-coche.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btEstadisticas" contentDisplay="TOP" mnemonicParsing="false" onAction="#mostrarEstadisticas" prefHeight="2000.0" prefWidth="2000.0" text="Estadisticas">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/llave-del-coche.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btBuscar2" contentDisplay="TOP" mnemonicParsing="false" onAction="#buscar" prefHeight="2000.0" prefWidth="2000.0" text="Buscar">
+               <graphic>
+                  <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../imagenes/llave-del-coche.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+      <TableView fx:id="tvAlquileres" prefHeight="2000.0" prefWidth="200.0">
+         <columns>
+            <TableColumn fx:id="tcCliente" maxWidth="-Infinity" minWidth="320.0" prefWidth="320.0" resizable="false" text="Cliente" />
+            <TableColumn fx:id="tcVehiculo" maxWidth="-Infinity" minWidth="320.0" prefWidth="320.0" resizable="false" text="Vehiculo" />
+            <TableColumn fx:id="tcFechaAlquiler" maxWidth="-Infinity" minWidth="320.0" prefWidth="320.0" resizable="false" text="Fecha Alquiler" />
+            <TableColumn fx:id="tcFechaDevolucion" maxWidth="-Infinity" minWidth="320.0" prefWidth="320.0" resizable="false" text="Fecha Devolucion" />
+         </columns>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#insertar" text="Insertar" />
+                  <MenuItem mnemonicParsing="false" onAction="#devolver" text="Devolver" />
+                  <MenuItem mnemonicParsing="false" onAction="#mostrarEstadisticas" text="Mostrar estadisticas" />
+                  <MenuItem mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </TableView>
+   </children>
+</VBox>

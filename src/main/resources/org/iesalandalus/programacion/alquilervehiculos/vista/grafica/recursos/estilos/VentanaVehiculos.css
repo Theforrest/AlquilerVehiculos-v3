@@ -1,0 +1,15 @@
+#raiz {
+	-fx-background-color: #030307;
+}
+
+.button {
+	-fx-font: 24 arial;
+	-fx-base: #302455;
+	-fx-text-fill: #a868a0;
+	
+}
+.table-view {
+	-fx-font: 24 arial;
+	-fx-base: #000000;
+	
+}

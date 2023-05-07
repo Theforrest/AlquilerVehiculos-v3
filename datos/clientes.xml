@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<clientes>
+    <cliente dni="11223344B" nombre="Bob Esponja" telefono="950112233"/>
+    <cliente dni="11111111H" nombre="Patricio Estrella" telefono="950111111"/>
+    <cliente dni="83349629K" nombre="Mi" telefono="601025863"/>
+    <cliente dni="12345678Z" nombre="Aa" telefono="611111111"/>
+</clientes>

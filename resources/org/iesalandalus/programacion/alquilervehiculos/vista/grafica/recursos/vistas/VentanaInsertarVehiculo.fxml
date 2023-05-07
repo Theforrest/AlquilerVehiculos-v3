@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="450.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaInsertarCliente.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaInsertarVehiculo">
+   <children>
+      <ChoiceBox fx:id="cbTipoVehiculo" prefWidth="150.0" />
+      <BorderPane fx:id="bpInsertar" prefHeight="400.0" prefWidth="200.0">
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" text="Button" />
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</VBox>

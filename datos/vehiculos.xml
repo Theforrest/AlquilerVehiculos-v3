@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<vehiculos>
+    <vehiculo marca="Scania" matricula="1234BCD" modelo="Citywide" plazas="60" tipo="autobus"/>
+    <vehiculo cilindrada="1100" marca="Seat" matricula="1111BBB" modelo="León" tipo="turismo"/>
+    <vehiculo cilindrada="1300" marca="Renault" matricula="2222CCC" modelo="Megane" tipo="turismo"/>
+    <vehiculo marca="Mercedes-Benz" matricula="3333DDD" modelo="eSprinter" plazas="2" pma="7000" tipo="furgoneta"/>
+    <vehiculo marca="A" matricula="1234ZZZ" modelo="df" plazas="10" tipo="autobus"/>
+</vehiculos>

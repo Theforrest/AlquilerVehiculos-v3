@@ -1,0 +1,19 @@
+
+
+.button {
+	-fx-font: 24 arial;
+	-fx-base: #302455;
+	-fx-text-fill: #a868a0;
+	
+}
+
+
+.invalido {
+	-fx-text-box-border: #FF0000;
+	-fx-focus-color: #FF0000;
+}
+
+.valido {
+	-fx-text-box-border: #00FF00;
+	-fx-focus-color: #00FF00;
+}
