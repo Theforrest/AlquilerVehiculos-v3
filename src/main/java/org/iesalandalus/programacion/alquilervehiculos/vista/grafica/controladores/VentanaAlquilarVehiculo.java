@@ -38,7 +38,6 @@ public class VentanaAlquilarVehiculo extends Controlador{
 		
 		Controles.setInvalido(tfCliente);
 		tfCliente.textProperty().addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_DNI, tfCliente));
-		Controles.formatearSelectorFecha(dpFechaAlquiler);
 	}
 	
 	@FXML

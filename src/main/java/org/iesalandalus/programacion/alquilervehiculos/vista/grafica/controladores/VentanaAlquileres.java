@@ -1,18 +1,23 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores;
 
-import java.time.LocalDate; 
+import java.io.IOException;
+import java.time.LocalDate;  
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.VistaGrafica;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controladores;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Dialogos;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,6 +27,16 @@ import javafx.stage.Stage;
 public class VentanaAlquileres extends Controlador {
 	private VistaGrafica vistaGrafica;
 
+	private static Scene escenaAlquileres;
+	
+	public static void setEscenaPrincipal(Scene escena) {
+		if (escenaAlquileres == null) {
+			escenaAlquileres = escena;
+			}
+	}
+	public static Scene getEscenaPrincipal() {
+		return escenaAlquileres;
+	}
 	@FXML
 	private Button btVolver;
 	@FXML
@@ -57,11 +72,10 @@ public class VentanaAlquileres extends Controlador {
 
 	@FXML
 	private void volver(ActionEvent event) {
-		VentanaPrincipal ventanaPrincipal = (VentanaPrincipal) Controladores.get("vistas/VentanaPrincipal.fxml", "",
-				null);
 		Stage escenario = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		escenario.setScene(ventanaPrincipal.getEscenario().getScene());
+		escenario.setScene(VentanaPrincipal.getEscenaPrincipal());
 		escenario.show();
+		
 	}
 
 	@FXML
@@ -87,12 +101,19 @@ public class VentanaAlquileres extends Controlador {
 
 	@FXML
 	private void mostrarEstadisticas(ActionEvent event) {
-		VentanaMostrarEstadisticas ventanaMostrarEstadisticas = (VentanaMostrarEstadisticas) Controladores
-				.get("vistas/VentanaMostrarEstadisticas.fxml", "", getEscenario());
-		ventanaMostrarEstadisticas.getEscenario().setResizable(false);
-		ventanaMostrarEstadisticas.getEscenario().showAndWait();
-		tvAlquileres.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres()));
 
+		Parent raiz = null;
+		try {
+			raiz = FXMLLoader.load(LocalizadorRecursos.class.getResource("vistas/VentanaMostrarEstadisticas.fxml"));
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+		Scene escena = new Scene(raiz);
+		Stage escenario = new Stage();
+		escenario.setScene(escena);
+		escenario.setResizable(false);
+		escenario.showAndWait();
+		tvAlquileres.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres()));
 	}
 
 	@FXML

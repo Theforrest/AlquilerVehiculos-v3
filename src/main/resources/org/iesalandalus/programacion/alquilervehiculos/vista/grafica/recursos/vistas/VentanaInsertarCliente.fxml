@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="300.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaInsertarCliente.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaInsertarCliente">
+<VBox id="raiz" prefHeight="300.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaFormularios.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaInsertarCliente">
    <children>
       <Label text="DNI" />
-      <TextField fx:id="tfDni" />
+      <TextField fx:id="tfDni" maxWidth="300.0" />
       <Label text="NOMBRE" />
-      <TextField fx:id="tfNombre" />
+      <TextField fx:id="tfNombre" maxWidth="300.0" />
       <Label text="TELEFONO" />
-      <TextField fx:id="tfTelefono" />
+      <TextField fx:id="tfTelefono" maxWidth="300.0" />
       <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0" VBox.vgrow="ALWAYS">
          <children>
             <Button fx:id="btInsertar" mnemonicParsing="false" onAction="#insertar" text="Insertar" />
@@ -28,4 +28,7 @@
          </padding>
       </HBox>
    </children>
+   <padding>
+      <Insets left="25.0" top="15.0" />
+   </padding>
 </VBox>

@@ -18,6 +18,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -28,7 +29,17 @@ import javafx.util.Callback;
 
 public class VentanaVehiculos extends Controlador {
 	private VistaGrafica vistaGrafica;
-
+	
+private static Scene escenaVehiculos;
+	
+	public static void setEscenaPrincipal(Scene escena) {
+		if (escenaVehiculos == null) {
+			escenaVehiculos = escena;
+			}
+	}
+	public static Scene getEscenaPrincipal() {
+		return escenaVehiculos;
+	}
 
 	@FXML
 	private Button btVolver;
@@ -118,11 +129,10 @@ public class VentanaVehiculos extends Controlador {
 
 	@FXML
 	private void volver(ActionEvent event) {
-		VentanaPrincipal ventanaPrincipal = (VentanaPrincipal) Controladores.get("vistas/VentanaPrincipal.fxml", "",
-				null);
 		Stage escenario = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		escenario.setScene(ventanaPrincipal.getEscenario().getScene());
+		escenario.setScene(VentanaPrincipal.getEscenaPrincipal());
 		escenario.show();
+		
 	}
 	@FXML
 	private void devolver() {

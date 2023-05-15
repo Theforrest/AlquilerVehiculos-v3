@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores;
 
-import javax.naming.OperationNotSupportedException;
+import javax.naming.OperationNotSupportedException; 
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
@@ -39,7 +39,6 @@ public class VentanaAlquilarCliente extends Controlador{
 		
 		Controles.setInvalido(tfVehiculo);
 		tfVehiculo.textProperty().addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(ER_MATRICULA, tfVehiculo));
-		Controles.formatearSelectorFecha(dpFechaAlquiler);
 	}
 	
 	@FXML

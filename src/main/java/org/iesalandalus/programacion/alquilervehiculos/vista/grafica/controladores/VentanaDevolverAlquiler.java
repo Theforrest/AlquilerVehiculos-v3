@@ -45,14 +45,15 @@ public class VentanaDevolverAlquiler extends Controlador {
 				.addListener((ob, oldValue, newValue) -> cambiarTipoDevolucion(newValue));
 		cbTipoDevolucion.setItems(FXCollections.observableArrayList("Cliente", "Vehiculo"));
 		cbTipoDevolucion.setValue("Cliente");
-		
+
 		Controles.setInvalido(tfDni);
-		tfDni.textProperty().addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_DNI, tfDni));
+		tfDni.textProperty()
+				.addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_DNI, tfDni));
 
 		Controles.setInvalido(tfMatricula);
-		tfMatricula.textProperty().addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Vehiculo.ER_MATRICULA, tfMatricula));
-		
-		Controles.formatearSelectorFecha(dpFechaDevolucion);
+		tfMatricula.textProperty().addListener(
+				(observable, oldValue, newValue) -> Controles.validarCampoTexto(Vehiculo.ER_MATRICULA, tfMatricula));
+
 	}
 
 	@FXML
@@ -74,7 +75,8 @@ public class VentanaDevolverAlquiler extends Controlador {
 	@FXML
 	private void devolver() {
 
-		if (cbTipoDevolucion.getValue().equals("Cliente") && tfDni.getStyleClass().contains("valido") && dpFechaDevolucion.getValue() != null) {
+		if (cbTipoDevolucion.getValue().equals("Cliente") && tfDni.getStyleClass().contains("valido")
+				&& dpFechaDevolucion.getValue() != null) {
 			try {
 				vistaGrafica.getControlador().devolver(Cliente.getClienteConDni(tfDni.getText()),
 						dpFechaDevolucion.getValue());
@@ -84,7 +86,8 @@ public class VentanaDevolverAlquiler extends Controlador {
 			} catch (OperationNotSupportedException | IllegalArgumentException e) {
 				Dialogos.mostrarDialogoError("ERROR", e.getMessage(), getEscenario());
 			}
-		} else if (cbTipoDevolucion.getValue().equals("Vehiculo") && tfMatricula.getStyleClass().contains("valido") && dpFechaDevolucion.getValue() != null) {
+		} else if (cbTipoDevolucion.getValue().equals("Vehiculo") && tfMatricula.getStyleClass().contains("valido")
+				&& dpFechaDevolucion.getValue() != null) {
 			try {
 				vistaGrafica.getControlador().devolver(Vehiculo.getVehiculoConMatricula(tfMatricula.getText()),
 						dpFechaDevolucion.getValue());

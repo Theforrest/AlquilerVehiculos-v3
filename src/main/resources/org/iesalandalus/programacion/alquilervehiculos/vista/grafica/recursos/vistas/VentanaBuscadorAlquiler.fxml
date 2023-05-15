@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaInsertarCliente.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaBuscadorAlquiler">
+<VBox prefHeight="400.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaFormularios.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaBuscadorAlquiler">
    <children>
       <Label text="DNI" />
-      <TextField fx:id="tfDni" />
+      <TextField fx:id="tfDni" maxWidth="300.0" />
       <Label text="MATRICULA" />
-      <TextField fx:id="tfMatricula" />
+      <TextField fx:id="tfMatricula" maxWidth="300.0" />
       <Label text="FECHA ALQUILER" />
       <DatePicker fx:id="dpFechaAlquiler" />
       <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="30.0" VBox.vgrow="ALWAYS">
@@ -29,4 +29,7 @@
          </padding>
       </HBox>
    </children>
+   <padding>
+      <Insets left="25.0" top="15.0" />
+   </padding>
 </VBox>

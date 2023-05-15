@@ -3,10 +3,11 @@ package org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
+
 import javafx.scene.Node;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
-import javafx.util.StringConverter;
 
 public class Controles {
 	
@@ -42,23 +43,49 @@ public class Controles {
 		}
 	}
 	
-	public static void formatearSelectorFecha(DatePicker selectorFecha) {
-		selectorFecha.setConverter(new StringConverter<LocalDate>() {
-
-			@Override
-			public String toString(LocalDate fecha) {
-				return (fecha == null ? "" : FORMATO_FECHA.format(fecha));
+    private static void limpiarCampoTexto(TextField campoTexto) {
+    	campoTexto.setText("");
+    	Controles.setInvalido(campoTexto);
+    }
+    
+    public static void limpiarCamposTexto(TextField ...camposTexto) {
+    	for (TextField campoTexto : camposTexto) {
+			limpiarCampoTexto(campoTexto);
+		}
+    }
+    
+    private static void deshabilitarCampoTexto(TextField campoTexto) {
+    	campoTexto.setDisable(true);
+    	limpiarCampoTexto(campoTexto);
+    	campoTexto.getStyleClass().remove(CSS_INVALIDO);
+    }
+    
+    public static void deshabilitarCamposTexto(TextField ...camposTexto) {
+    	for (TextField campoTexto : camposTexto) {
+    		deshabilitarCampoTexto(campoTexto);
+    	}
+    }
+    
+    private static void habilitarCampoTexto(TextField campoTexto) {
+    	campoTexto.setDisable(false);
+    	Controles.setInvalido(campoTexto);
+    }
+    
+    public static void habilitarCamposTexto(TextField ...camposTexto) {
+    	for (TextField campoTexto : camposTexto) {
+    		habilitarCampoTexto(campoTexto);
+    	}
+    }
+    
+	public static class FormateadorCeldaFecha extends TableCell<Alquiler, LocalDate> {
+		@Override
+		protected void updateItem(LocalDate fecha, boolean vacio) {
+			super.updateItem(fecha, vacio);
+			if (vacio || fecha == null) {
+				setText("");
+			} else {
+				setText(FORMATO_FECHA.format(fecha));
 			}
-
-			@Override
-			public LocalDate fromString(String fechaCadena) {
-				LocalDate fecha = null;
-				if (fechaCadena != null && fechaCadena.trim().isEmpty()) {
-					fecha = LocalDate.parse(fechaCadena, FORMATO_FECHA);
-				}
-				return fecha;
-			}
-    		
-    	});
+		}
 	}
 }

@@ -14,6 +14,7 @@ public class LanzadorVentanaPrincipal extends Application{
 	public void start(Stage escenarioPrincipal) {
 		try {
 			VentanaPrincipal ventanaPrincipal = (VentanaPrincipal) Controladores.get("vistas/VentanaPrincipal.fxml", "", null);
+			VentanaPrincipal.setEscenaPrincipal(ventanaPrincipal.getEscenario().getScene());
 			ventanaPrincipal.getEscenario().setOnCloseRequest(e -> confirmarSalir(ventanaPrincipal.getEscenario(), e));
 			ventanaPrincipal.getEscenario().show();
 		} catch(Exception e) {

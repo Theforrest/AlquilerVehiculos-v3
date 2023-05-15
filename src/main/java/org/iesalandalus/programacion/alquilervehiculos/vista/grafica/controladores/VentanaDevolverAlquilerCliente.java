@@ -1,10 +1,9 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores;
 
-import javax.naming.OperationNotSupportedException; 
+import javax.naming.OperationNotSupportedException;  
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.VistaGrafica;
-import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controles;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Dialogos;
 
 import javafx.fxml.FXML;
@@ -30,7 +29,6 @@ public class VentanaDevolverAlquilerCliente extends Controlador{
 		//Inicializando la vista
 		vistaGrafica = VistaGrafica.getInstancia();
 		
-		Controles.formatearSelectorFecha(dpFechaDevolucion);
 	}
 	
 	@FXML

@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores;
 
-import java.time.LocalDate; 
+import java.time.LocalDate;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -27,7 +27,6 @@ public class VentanaBuscarCliente extends Controlador {
 	private VistaGrafica vistaGrafica;
 	private Cliente cliente;
 
-
 	@FXML
 	private Button btCerrar;
 
@@ -52,12 +51,11 @@ public class VentanaBuscarCliente extends Controlador {
 		// Inicializando la vista
 		vistaGrafica = VistaGrafica.getInstancia();
 
-		tfNombre.textProperty()
-				.addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_NOMBRE, tfNombre));
-		tfTelefono.textProperty()
-				.addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_TELEFONO, tfTelefono));
+		tfNombre.textProperty().addListener(
+				(observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_NOMBRE, tfNombre));
+		tfTelefono.textProperty().addListener(
+				(observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_TELEFONO, tfTelefono));
 
-		
 	}
 
 	@FXML
@@ -85,7 +83,7 @@ public class VentanaBuscarCliente extends Controlador {
 		if (tfNombre.getStyleClass().contains("valido") && tfTelefono.getStyleClass().contains("valido")) {
 			try {
 				vistaGrafica.getControlador().modificar(cliente, tfNombre.getText(), tfTelefono.getText());
-				
+
 				Dialogos.mostrarDialogoInformacion("Modificacion correcta", "Cliente modificado correctamente",
 						getEscenario());
 			} catch (OperationNotSupportedException | IllegalArgumentException e) {
@@ -102,15 +100,14 @@ public class VentanaBuscarCliente extends Controlador {
 
 		try {
 			vistaGrafica.getControlador().borrar(cliente);
-			Dialogos.mostrarDialogoInformacion("Borrado correcto", "Cliente borrado correctamente",
-					getEscenario());
+			Dialogos.mostrarDialogoInformacion("Borrado correcto", "Cliente borrado correctamente", getEscenario());
 			cerrar();
 		} catch (OperationNotSupportedException | IllegalArgumentException e) {
 			Dialogos.mostrarDialogoError("ERROR", e.getMessage(), getEscenario());
 		}
 
 	}
-	
+
 	@FXML
 	private void alquilar(ActionEvent event) {
 		VentanaAlquilarCliente ventanaAlquilarCliente = (VentanaAlquilarCliente) Controladores
@@ -122,7 +119,7 @@ public class VentanaBuscarCliente extends Controlador {
 		tvAlquileres.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(cliente)));
 
 	}
-	
+
 	@FXML
 	private void devolver() {
 		VentanaDevolverAlquilerCliente ventanaDevolverAlquiler = (VentanaDevolverAlquilerCliente) Controladores
@@ -131,8 +128,7 @@ public class VentanaBuscarCliente extends Controlador {
 		ventanaDevolverAlquiler.setCliente(cliente);
 		ventanaDevolverAlquiler.getEscenario().showAndWait();
 		tvAlquileres.getItems().clear();
-		tvAlquileres
-		.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(cliente)));
+		tvAlquileres.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(cliente)));
 
 	}
 }

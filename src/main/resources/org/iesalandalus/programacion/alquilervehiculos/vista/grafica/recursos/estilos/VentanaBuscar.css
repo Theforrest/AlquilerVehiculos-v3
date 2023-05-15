@@ -1,0 +1,46 @@
+.root {
+	-fx-background-color: #1b161b ;
+	-fx-padding: 15 25 15 25;
+}
+
+.label {
+	-fx-font: 18 arial;
+	-fx-text-fill: #c79ec3;
+}
+
+
+.button {
+	-fx-font: 24 arial;
+	-fx-base: #302455;
+	-fx-text-fill: #c79ec3;
+	
+}
+
+.text-field {
+	-fx-font: 18 arial;
+	-fx-background-color:  #503050;
+	-fx-background-radius: 0, 0, 0, 0;
+	-fx-text-fill: #c79ec3;
+	-fx-max-width: 300;
+}
+
+.invalido {
+	-fx-border-color: #FF0000;
+	-fx-focus-color: #FF0000;
+}
+
+.valido {
+	-fx-border-color: #00FF00;
+	-fx-focus-color: #00FF00;
+}
+
+.table-view {
+	-fx-font: 24 arial;
+	-fx-base: #000000;
+	
+}
+
+.muestra-texto {
+	-fx-background-color:  #503050;
+	-fx-min-width: 300;
+}

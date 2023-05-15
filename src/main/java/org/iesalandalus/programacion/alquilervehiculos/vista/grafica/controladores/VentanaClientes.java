@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -21,6 +22,17 @@ import javafx.stage.Stage;
 
 public class VentanaClientes extends Controlador {
 	private VistaGrafica vistaGrafica;
+	
+	private static Scene escenaClientes;
+	
+	public static void setEscenaPrincipal(Scene escena) {
+		if (escenaClientes == null) {
+			escenaClientes = escena;
+			}
+	}
+	public static Scene getEscenaPrincipal() {
+		return escenaClientes;
+	}
 
 	@FXML
 	private Button btVolver;
@@ -70,11 +82,10 @@ public class VentanaClientes extends Controlador {
 
 	@FXML
 	private void volver(ActionEvent event) {
-		VentanaPrincipal ventanaPrincipal = (VentanaPrincipal) Controladores.get("vistas/VentanaPrincipal.fxml", "",
-				null);
 		Stage escenario = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		escenario.setScene(ventanaPrincipal.getEscenario().getScene());
+		escenario.setScene(VentanaPrincipal.getEscenaPrincipal());
 		escenario.show();
+		
 	}
 	
 	@FXML

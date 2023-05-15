@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.Controlador;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.recursos.LocalizadorRecursos;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.Controlador;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,13 +14,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class Controladores {
-	private static final Map<String, Controlador> controladores = new HashMap<>();
+
+	private static final Map<String, Controlador> controladoresCreados = new HashMap<>();
 
 	private Controladores() {
 	}
 
 	public static Controlador get(String vistaFxml, String titulo, Stage propietario) {
-		return controladores.getOrDefault(vistaFxml, crear(vistaFxml, titulo, propietario));
+		return controladoresCreados.containsKey(vistaFxml) ? controladoresCreados.get(vistaFxml) : crear(vistaFxml, titulo, propietario);
 	}
 
 	private static Controlador crear(String vistaFxml, String titulo, Stage propietario) {
@@ -35,7 +36,7 @@ public class Controladores {
 			escenario.initModality(Modality.APPLICATION_MODAL);
 			escenario.setTitle(titulo);
 			escenario.setScene(new Scene(raiz));
-			controladores.put(vistaFxml, controlador);
+			controladoresCreados.put(vistaFxml, controlador);
 		} catch (IOException e) {
 			System.out.println("Error al cargar: " + vistaFxml);
 		}

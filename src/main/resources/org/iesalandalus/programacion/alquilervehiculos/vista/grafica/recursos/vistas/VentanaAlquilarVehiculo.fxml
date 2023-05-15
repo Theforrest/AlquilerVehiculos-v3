@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="300.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaAlquilarCliente.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaAlquilarVehiculo">
+<VBox prefHeight="300.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaFormularios.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaAlquilarVehiculo">
    <children>
       <Label text="DNI CLIENTE" />
       <TextField fx:id="tfCliente" />

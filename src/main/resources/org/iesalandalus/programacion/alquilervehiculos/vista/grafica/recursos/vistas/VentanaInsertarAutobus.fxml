@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaInsertarCliente.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaInsertarAutobus">
+<VBox prefHeight="400.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaFormularios.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaInsertarAutobus">
    <children>
       <Label text="MATRICULA" />
       <TextField fx:id="tfMatricula" />
