@@ -5,4 +5,5 @@
     <alquiler cliente="11223344B" fechaAlquiler="10/03/2023" fechaDevolucion="16/03/2023" vehiculo="1234BCD"/>
     <alquiler cliente="11111111H" fechaAlquiler="15/03/2023" vehiculo="2222CCC"/>
     <alquiler cliente="12345678Z" fechaAlquiler="01/05/2023" fechaDevolucion="02/05/2023" vehiculo="1234ZZZ"/>
+    <alquiler cliente="12345678Z" fechaAlquiler="10/05/2023" fechaDevolucion="17/05/2023" vehiculo="1234ZZZ"/>
 </alquileres>

@@ -37,10 +37,20 @@ public class VentanaBuscadorAlquiler extends Controlador {
 
 		Controles.setInvalido(tfMatricula);
 		tfMatricula.textProperty().addListener(
-				(observable, oldValue, newValue) -> Controles.validarCampoTexto(Vehiculo.ER_MATRICULA, tfMatricula));
+				(observable, oldValue, newValue) -> deshabilitarBoton(Vehiculo.ER_MATRICULA, tfMatricula));
 		Controles.setInvalido(tfDni);
 		tfDni.textProperty()
-				.addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_DNI, tfDni));
+				.addListener((observable, oldValue, newValue) -> deshabilitarBoton(Cliente.ER_DNI, tfDni));
+
+	}
+	
+	private void deshabilitarBoton(String er, TextField campoTexto) {
+		Controles.validarCampoTexto(er, campoTexto);
+
+		boolean invalido = !(tfMatricula.getStyleClass().contains("valido") && tfDni.getStyleClass().contains("valido")
+				&& dpFechaAlquiler.getValue() != null);
+
+		btBuscar.setDisable(invalido);
 
 	}
 
@@ -52,8 +62,7 @@ public class VentanaBuscadorAlquiler extends Controlador {
 	@FXML
 	private void buscar() {
 
-		if (tfMatricula.getStyleClass().contains("valido") && tfDni.getStyleClass().contains("valido")
-				&& dpFechaAlquiler.getValue() != null) {
+		
 
 			alquiler = vistaGrafica.getControlador().buscar(new Alquiler(Cliente.getClienteConDni(tfDni.getText()),
 					Vehiculo.getVehiculoConMatricula(tfMatricula.getText()), dpFechaAlquiler.getValue()));
@@ -61,13 +70,10 @@ public class VentanaBuscadorAlquiler extends Controlador {
 				cerrar();
 
 			} else {
-				Dialogos.mostrarDialogoError("Cliente no encontrado", "No existe ningun alquiler con esos datos",
-						null);
+				Dialogos.mostrarDialogoError("Cliente no encontrado", "No existe ningun alquiler con esos datos", null);
 			}
 
-		} else {
-			Dialogos.mostrarDialogoError("ERROR", "Todos los campos deben de ser validos", getEscenario());
-		}
+		
 
 	}
 

@@ -11,6 +11,7 @@ import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.VistaGrafic
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controladores;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controles;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Dialogos;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controles.FormateadorCeldaFecha;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -29,7 +30,8 @@ public class VentanaBuscarCliente extends Controlador {
 
 	@FXML
 	private Button btCerrar;
-
+	@FXML
+	private Button btModificar;
 	@FXML
 	private Label lbDni;
 	@FXML
@@ -52,9 +54,19 @@ public class VentanaBuscarCliente extends Controlador {
 		vistaGrafica = VistaGrafica.getInstancia();
 
 		tfNombre.textProperty().addListener(
-				(observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_NOMBRE, tfNombre));
+				(observable, oldValue, newValue) -> deshabilitarBoton(Cliente.ER_NOMBRE, tfNombre));
 		tfTelefono.textProperty().addListener(
-				(observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_TELEFONO, tfTelefono));
+				(observable, oldValue, newValue) -> deshabilitarBoton(Cliente.ER_TELEFONO, tfTelefono));
+		btModificar.setDisable(true);
+	}
+	
+	private void deshabilitarBoton(String er, TextField campoTexto) {
+		Controles.validarCampoTexto(er, campoTexto);
+
+		boolean invalido = !(tfNombre.getStyleClass().contains("valido")
+				&& tfTelefono.getStyleClass().contains("valido"));
+
+		btModificar.setDisable(invalido);
 
 	}
 
@@ -73,6 +85,8 @@ public class VentanaBuscarCliente extends Controlador {
 		tcVehiculo.setCellValueFactory(new PropertyValueFactory<>("vehiculo"));
 		tcFechaAlquiler.setCellValueFactory(new PropertyValueFactory<>("fechaAlquiler"));
 		tcFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
+		tcFechaAlquiler.setCellFactory(cell -> new FormateadorCeldaFecha());
+		tcFechaDevolucion.setCellFactory(cell -> new FormateadorCeldaFecha());
 
 		tvAlquileres.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(cliente)));
 	}
@@ -80,7 +94,6 @@ public class VentanaBuscarCliente extends Controlador {
 	@FXML
 	private void modificar() {
 
-		if (tfNombre.getStyleClass().contains("valido") && tfTelefono.getStyleClass().contains("valido")) {
 			try {
 				vistaGrafica.getControlador().modificar(cliente, tfNombre.getText(), tfTelefono.getText());
 
@@ -89,9 +102,6 @@ public class VentanaBuscarCliente extends Controlador {
 			} catch (OperationNotSupportedException | IllegalArgumentException e) {
 				Dialogos.mostrarDialogoError("ERROR", e.getMessage(), getEscenario());
 			}
-		} else {
-			Dialogos.mostrarDialogoError("ERROR", "Todos los campos deben de ser validos", getEscenario());
-		}
 
 	}
 

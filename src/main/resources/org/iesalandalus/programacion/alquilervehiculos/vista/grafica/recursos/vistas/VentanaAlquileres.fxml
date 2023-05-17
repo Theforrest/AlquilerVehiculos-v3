@@ -18,7 +18,7 @@
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../imagenes/usuario.png" />
+                        <Image url="@../imagenes/flecha-circulo-izquierda.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -27,7 +27,7 @@
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../imagenes/coche.png" />
+                        <Image url="@../imagenes/agregar.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -45,7 +45,7 @@
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../imagenes/llave-del-coche.png" />
+                        <Image url="@../imagenes/grafico-circular.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -54,7 +54,7 @@
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../imagenes/llave-del-coche.png" />
+                        <Image url="@../imagenes/busqueda.png" />
                      </image>
                   </ImageView>
                </graphic>

@@ -16,7 +16,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Ayuda">
             <items>
-              <MenuItem mnemonicParsing="false" text="Acerca De" />
+              <MenuItem mnemonicParsing="false" onAction="#abrirVentanaAcercaDe" text="Acerca De" />
             </items>
           </Menu>
         </menus>
@@ -48,7 +48,7 @@
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../imagenes/llave-del-coche.png" />
+                        <Image url="@../imagenes/cuaderno-alternativo%20(1).png" />
                      </image>
                   </ImageView>
                </graphic>

@@ -9,52 +9,64 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class VentanaPrincipal extends Controlador{
-	
-	
-	
+public class VentanaPrincipal extends Controlador {
+
 	@FXML
 	private Button btPulsame;
 	@FXML
 	private Button btVehiculos;
-	
+
 	private static Scene escenaPrincipal;
-	
+
 	public static void setEscenaPrincipal(Scene escena) {
 		if (escenaPrincipal == null) {
-		escenaPrincipal = escena;
+			escenaPrincipal = escena;
 		}
 	}
+
 	public static Scene getEscenaPrincipal() {
 		return escenaPrincipal;
 	}
-	
+
 	@FXML
 	private void abrirVentanaClientes(ActionEvent event) {
-		VentanaClientes ventanaClientes = (VentanaClientes) Controladores.get("vistas/VentanaClientes.fxml", "", getEscenario());
+		VentanaClientes ventanaClientes = (VentanaClientes) Controladores.get("vistas/VentanaClientes.fxml", "",
+				getEscenario());
 		VentanaClientes.setEscenaPrincipal(ventanaClientes.getEscenario().getScene());
-		Stage escenario = (Stage)((Node)event.getSource()).getScene().getWindow();
+		Stage escenario = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		escenario.setScene(VentanaClientes.getEscenaPrincipal());
 		escenario.setResizable(false);
 		escenario.show();
 	}
+
 	@FXML
 	private void abrirVentanaVehiculos(ActionEvent event) {
-		VentanaVehiculos ventanaVehiculos = (VentanaVehiculos) Controladores.get("vistas/VentanaVehiculos.fxml", "", getEscenario());
+		VentanaVehiculos ventanaVehiculos = (VentanaVehiculos) Controladores.get("vistas/VentanaVehiculos.fxml", "",
+				getEscenario());
 		VentanaVehiculos.setEscenaPrincipal(ventanaVehiculos.getEscenario().getScene());
-		Stage escenario = (Stage)((Node)event.getSource()).getScene().getWindow();
+		Stage escenario = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		escenario.setScene(VentanaVehiculos.getEscenaPrincipal());
 		escenario.setResizable(false);
 		escenario.show();
 	}
+
 	@FXML
 	private void abrirVentanaAlquileres(ActionEvent event) {
-		VentanaAlquileres ventanaAlquileres = (VentanaAlquileres) Controladores.get("vistas/VentanaAlquileres.fxml", "", getEscenario());
+		VentanaAlquileres ventanaAlquileres = (VentanaAlquileres) Controladores.get("vistas/VentanaAlquileres.fxml", "",
+				getEscenario());
 		VentanaAlquileres.setEscenaPrincipal(ventanaAlquileres.getEscenario().getScene());
-		Stage escenario = (Stage)((Node)event.getSource()).getScene().getWindow();
+		Stage escenario = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		escenario.setScene(VentanaAlquileres.getEscenaPrincipal());
 		escenario.setResizable(false);
 		escenario.show();
+	}
+
+	@FXML
+	private void abrirVentanaAcercaDe(ActionEvent event) {
+		VentanaAcercaDe ventanaAcercaDe = (VentanaAcercaDe) Controladores.get("vistas/VentanaAcercaDe.fxml", "",
+				getEscenario());
+		ventanaAcercaDe.getEscenario().setResizable(false);
+		ventanaAcercaDe.getEscenario().showAndWait();
 	}
 
 }

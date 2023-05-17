@@ -23,29 +23,24 @@ public class VentanaInsertarVehiculo extends Controlador {
 	@FXML
 	private void initialize() {
 		cbTipoVehiculo.getSelectionModel().selectedItemProperty()
-		.addListener((ob, oldValue, newValue) -> cambiarTipoVehiculo(newValue));
+				.addListener((ob, oldValue, newValue) -> cambiarTipoVehiculo(newValue));
 		cbTipoVehiculo.setItems(FXCollections.observableArrayList("Turismo", "Autobus", "Furgoneta"));
 		cbTipoVehiculo.setValue("Turismo");
 
-		
-		
-		
-		
-
 	}
-	
+
 	private void cambiarTipoVehiculo(String tipoVehiculo) {
-		
-		// Controlador ventanaInsertarTurismo = Controladores.get(String.format("vistas/VentanaInsertar%s.fxml", tipoVehiculo), "", null);
-		FXMLLoader cargador = new FXMLLoader(LocalizadorRecursos.class.getResource(String.format("vistas/VentanaInsertar%s.fxml", tipoVehiculo)));
+
+		FXMLLoader cargador = new FXMLLoader(
+				LocalizadorRecursos.class.getResource(String.format("vistas/VentanaInsertar%s.fxml", tipoVehiculo)));
 		Parent raiz = null;
-		
+
 		try {
 			raiz = cargador.load();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		bpInsertar.setCenter(raiz);
 
 	}

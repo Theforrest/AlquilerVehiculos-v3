@@ -1,7 +1,7 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores;
 
 import java.io.IOException;
-import java.time.LocalDate;  
+import java.time.LocalDate;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
@@ -9,6 +9,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.recursos.LocalizadorRecursos;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controladores;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controles.FormateadorCeldaFecha;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Dialogos;
 
 import javafx.collections.FXCollections;
@@ -28,15 +29,17 @@ public class VentanaAlquileres extends Controlador {
 	private VistaGrafica vistaGrafica;
 
 	private static Scene escenaAlquileres;
-	
+
 	public static void setEscenaPrincipal(Scene escena) {
 		if (escenaAlquileres == null) {
 			escenaAlquileres = escena;
-			}
+		}
 	}
+
 	public static Scene getEscenaPrincipal() {
 		return escenaAlquileres;
 	}
+
 	@FXML
 	private Button btVolver;
 	@FXML
@@ -65,6 +68,8 @@ public class VentanaAlquileres extends Controlador {
 		tcVehiculo.setCellValueFactory(new PropertyValueFactory<>("vehiculo"));
 		tcFechaAlquiler.setCellValueFactory(new PropertyValueFactory<>("fechaAlquiler"));
 		tcFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
+		tcFechaAlquiler.setCellFactory(cell -> new FormateadorCeldaFecha());
+		tcFechaDevolucion.setCellFactory(cell -> new FormateadorCeldaFecha());
 
 		tvAlquileres.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres()));
 
@@ -75,7 +80,7 @@ public class VentanaAlquileres extends Controlador {
 		Stage escenario = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		escenario.setScene(VentanaPrincipal.getEscenaPrincipal());
 		escenario.show();
-		
+
 	}
 
 	@FXML

@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores;
 
-import java.time.LocalDate;  
+import java.time.LocalDate;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Autobus;
@@ -11,6 +11,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controladores;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Dialogos;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controles.FormateadorCeldaFecha;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -29,14 +30,15 @@ import javafx.util.Callback;
 
 public class VentanaVehiculos extends Controlador {
 	private VistaGrafica vistaGrafica;
-	
-private static Scene escenaVehiculos;
-	
+
+	private static Scene escenaVehiculos;
+
 	public static void setEscenaPrincipal(Scene escena) {
 		if (escenaVehiculos == null) {
 			escenaVehiculos = escena;
-			}
+		}
 	}
+
 	public static Scene getEscenaPrincipal() {
 		return escenaVehiculos;
 	}
@@ -81,30 +83,28 @@ private static Scene escenaVehiculos;
 		tcMarca.setCellValueFactory(new PropertyValueFactory<>("marca"));
 		tcModelo.setCellValueFactory(new PropertyValueFactory<>("modelo"));
 		tcMatricula.setCellValueFactory(new PropertyValueFactory<>("matricula"));
-		tcCilindrada.setCellValueFactory(
-			      new Callback<CellDataFeatures<Vehiculo, String>, ObservableValue<String>>() {
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<Vehiculo, String> param) {
-						if (param.getValue() instanceof Turismo turismo) {
-							return new ReadOnlyObjectWrapper<>(String.format("%s", turismo.getCilindrada()));
-						} else {
-							return new ReadOnlyObjectWrapper<>("");
-						}
-					}
-			      });
-		tcPlazas.setCellValueFactory(
-			      new Callback<CellDataFeatures<Vehiculo, String>, ObservableValue<String>>() {
-					@Override
-					public ObservableValue<String> call(CellDataFeatures<Vehiculo, String> param) {
-						if (param.getValue() instanceof Autobus autobus) {
-							return new ReadOnlyObjectWrapper<>(String.format("%s", autobus.getPlazas()));
-						} else if (param.getValue() instanceof Furgoneta fugoneta) {
-							return new ReadOnlyObjectWrapper<>(String.format("%s", fugoneta.getPlazas()));
-						} else {
-							return new ReadOnlyObjectWrapper<>("");
-						}
-					}
-			      });
+		tcCilindrada.setCellValueFactory(new Callback<CellDataFeatures<Vehiculo, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<Vehiculo, String> param) {
+				if (param.getValue() instanceof Turismo turismo) {
+					return new ReadOnlyObjectWrapper<>(String.format("%s", turismo.getCilindrada()));
+				} else {
+					return new ReadOnlyObjectWrapper<>("");
+				}
+			}
+		});
+		tcPlazas.setCellValueFactory(new Callback<CellDataFeatures<Vehiculo, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<Vehiculo, String> param) {
+				if (param.getValue() instanceof Autobus autobus) {
+					return new ReadOnlyObjectWrapper<>(String.format("%s", autobus.getPlazas()));
+				} else if (param.getValue() instanceof Furgoneta fugoneta) {
+					return new ReadOnlyObjectWrapper<>(String.format("%s", fugoneta.getPlazas()));
+				} else {
+					return new ReadOnlyObjectWrapper<>("");
+				}
+			}
+		});
 		tcPma.setCellValueFactory(new Callback<CellDataFeatures<Vehiculo, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<Vehiculo, String> param) {
@@ -114,7 +114,7 @@ private static Scene escenaVehiculos;
 					return new ReadOnlyObjectWrapper<>("");
 				}
 			}
-	      });
+		});
 
 		tvVehiculos.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getVehiculos()));
 
@@ -122,6 +122,8 @@ private static Scene escenaVehiculos;
 		tcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 		tcFechaAlquiler.setCellValueFactory(new PropertyValueFactory<>("fechaAlquiler"));
 		tcFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
+		tcFechaAlquiler.setCellFactory(cell -> new FormateadorCeldaFecha());
+		tcFechaDevolucion.setCellFactory(cell -> new FormateadorCeldaFecha());
 
 		tvVehiculos.getSelectionModel().selectedItemProperty()
 				.addListener((ob, oldValue, newValue) -> mostrarAlquileres(newValue));
@@ -132,14 +134,16 @@ private static Scene escenaVehiculos;
 		Stage escenario = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		escenario.setScene(VentanaPrincipal.getEscenaPrincipal());
 		escenario.show();
-		
+
 	}
+
 	@FXML
 	private void devolver() {
 		Vehiculo vehiculo = null;
 		String matricula;
 		do {
-			matricula = Dialogos.mostrarDialogoTexto("Buscar Vehiculo", "Escriba la matrícula del vehículo a buscar", null);
+			matricula = Dialogos.mostrarDialogoTexto("Buscar Vehiculo", "Escriba la matrícula del vehículo a buscar",
+					null);
 			if (matricula != null) {
 				try {
 					vehiculo = vistaGrafica.getControlador().buscar(Vehiculo.getVehiculoConMatricula(matricula));
@@ -150,8 +154,8 @@ private static Scene escenaVehiculos;
 						ventanaDevolverAlquiler.setVehiculo(vehiculo);
 						ventanaDevolverAlquiler.getEscenario().showAndWait();
 						tvAlquileres.getItems().clear();
-						tvAlquileres
-						.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(vehiculo)));
+						tvAlquileres.setItems(FXCollections
+								.observableArrayList(vistaGrafica.getControlador().getAlquileres(vehiculo)));
 						matricula = null;
 					} else {
 						Dialogos.mostrarDialogoError("Cliente no encontrado", "No existe ningún cliente con ese DNI",
@@ -181,7 +185,8 @@ private static Scene escenaVehiculos;
 		Vehiculo vehiculo = null;
 		String matricula;
 		do {
-			matricula = Dialogos.mostrarDialogoTexto("Buscar Vehiculo", "Escriba la matrícula del vehículo a buscar", null);
+			matricula = Dialogos.mostrarDialogoTexto("Buscar Vehiculo", "Escriba la matrícula del vehículo a buscar",
+					null);
 			if (matricula != null) {
 				try {
 					vehiculo = vistaGrafica.getControlador().buscar(Vehiculo.getVehiculoConMatricula(matricula));

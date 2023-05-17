@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="450.0" prefWidth="600.0" spacing="10.0" stylesheets="@../estilos/VentanaFormularios.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaInsertarVehiculo">
+<VBox prefHeight="550.0" prefWidth="700.0" spacing="10.0" stylesheets="@../estilos/VentanaFormularios.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaInsertarVehiculo">
    <children>
       <ChoiceBox fx:id="cbTipoVehiculo" prefWidth="150.0" />
       <BorderPane fx:id="bpInsertar" prefHeight="400.0" prefWidth="200.0">

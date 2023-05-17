@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores;
 
-import java.time.LocalDate;  
+import java.time.LocalDate;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -13,6 +13,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controladores;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Dialogos;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controles.FormateadorCeldaFecha;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -70,7 +71,7 @@ public class VentanaBuscarVehiculo extends Controlador {
 		lbMatricula.setText(vehiculo.getMatricula());
 		lbMarca.setText(vehiculo.getMarca());
 		lbModelo.setText(vehiculo.getModelo());
-		
+
 		if (vehiculo instanceof Autobus autobus) {
 			lbPlazas.setText(String.format("%s", autobus.getPlazas()));
 		} else if (vehiculo instanceof Furgoneta fugoneta) {
@@ -84,26 +85,25 @@ public class VentanaBuscarVehiculo extends Controlador {
 		tcCliente.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 		tcFechaAlquiler.setCellValueFactory(new PropertyValueFactory<>("fechaAlquiler"));
 		tcFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
+		tcFechaAlquiler.setCellFactory(cell -> new FormateadorCeldaFecha());
+		tcFechaDevolucion.setCellFactory(cell -> new FormateadorCeldaFecha());
 
 		tvAlquileres.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(vehiculo)));
 	}
-
-	
 
 	@FXML
 	private void borrar() {
 
 		try {
 			vistaGrafica.getControlador().borrar(vehiculo);
-			Dialogos.mostrarDialogoInformacion("Borrado correcto", "Cliente borrado correctamente",
-					getEscenario());
+			Dialogos.mostrarDialogoInformacion("Borrado correcto", "Cliente borrado correctamente", getEscenario());
 			cerrar();
 		} catch (OperationNotSupportedException | IllegalArgumentException e) {
 			Dialogos.mostrarDialogoError("ERROR", e.getMessage(), getEscenario());
 		}
 
 	}
-	
+
 	@FXML
 	private void alquilar(ActionEvent event) {
 		VentanaAlquilarVehiculo ventanaAlquilarVehiculo = (VentanaAlquilarVehiculo) Controladores
@@ -115,6 +115,7 @@ public class VentanaBuscarVehiculo extends Controlador {
 		tvAlquileres.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(vehiculo)));
 
 	}
+
 	@FXML
 	private void devolver() {
 		VentanaDevolverAlquilerVehiculo ventanaDevolverAlquiler = (VentanaDevolverAlquilerVehiculo) Controladores
@@ -123,7 +124,6 @@ public class VentanaBuscarVehiculo extends Controlador {
 		ventanaDevolverAlquiler.setVehiculo(vehiculo);
 		ventanaDevolverAlquiler.getEscenario().showAndWait();
 		tvAlquileres.getItems().clear();
-		tvAlquileres
-		.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(vehiculo)));
+		tvAlquileres.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(vehiculo)));
 	}
 }

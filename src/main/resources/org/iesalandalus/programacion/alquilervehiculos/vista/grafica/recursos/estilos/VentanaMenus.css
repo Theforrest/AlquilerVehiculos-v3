@@ -1,13 +1,19 @@
 .root {
 	-fx-background-color: #030307;
+	-fx-focus-color: a868a0;
 }
 
 .button {
 	-fx-font: 24 arial;
 	-fx-base: #302455;
-	-fx-text-fill: #a868a0;
+	-fx-text-fill: #a868a0;	
 	
 }
+
+.button:hover {
+    -fx-background-color: #523d8f;
+}
+
 .table-view {
 	-fx-font: 24 arial;
 	-fx-base: #000000;

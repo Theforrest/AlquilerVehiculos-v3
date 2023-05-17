@@ -15,54 +15,63 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class VentanaInsertarAlquiler extends Controlador{
+public class VentanaInsertarAlquiler extends Controlador {
 	private VistaGrafica vistaGrafica;
-	
+
 	@FXML
 	private Button btCerrar;
-	
+
 	@FXML
 	private Button btInsertar;
-	
+
 	@FXML
 	private TextField tfMatricula;
 	@FXML
-	private TextField tfDni;	
+	private TextField tfDni;
 	@FXML
 	private DatePicker dpFechaAlquiler;
-	
+
 	@FXML
 	private void initialize() {
-		//Inicializando la vista
+		// Inicializando la vista
 		vistaGrafica = VistaGrafica.getInstancia();
-		
+
 		Controles.setInvalido(tfMatricula);
-		tfMatricula.textProperty().addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Vehiculo.ER_MATRICULA, tfMatricula));
+		tfMatricula.textProperty()
+				.addListener((observable, oldValue, newValue) -> deshabilitarBoton(Vehiculo.ER_MATRICULA, tfMatricula));
 		Controles.setInvalido(tfDni);
-		tfDni.textProperty().addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_DNI, tfDni));
-		
+		tfDni.textProperty().addListener((observable, oldValue, newValue) -> deshabilitarBoton(Cliente.ER_DNI, tfDni));
+
 	}
-	
+
+	private void deshabilitarBoton(String er, TextField campoTexto) {
+		Controles.validarCampoTexto(er, campoTexto);
+
+		boolean invalido = !(tfMatricula.getStyleClass().contains("valido") && tfDni.getStyleClass().contains("valido")
+				&& dpFechaAlquiler.getValue() != null);
+
+		btInsertar.setDisable(invalido);
+
+	}
+
 	@FXML
 	private void cerrar() {
 		((Stage) btCerrar.getParent().getScene().getWindow()).close();
 	}
-	
+
 	@FXML
 	private void insertar() {
-		
-		if (tfMatricula.getStyleClass().contains("valido") && tfDni.getStyleClass().contains("valido") && dpFechaAlquiler.getValue() != null) {
-			try {
-				vistaGrafica.getControlador().insertar(new Alquiler(Cliente.getClienteConDni(tfDni.getText()), Vehiculo.getVehiculoConMatricula(tfMatricula.getText()), dpFechaAlquiler.getValue()));
-				Dialogos.mostrarDialogoInformacion("Insercion correcta", "Alquiler insertado correctamente", getEscenario());
-				((Stage) btInsertar.getParent().getScene().getWindow()).close();
-			} catch (OperationNotSupportedException | IllegalArgumentException e) {
-				Dialogos.mostrarDialogoError("ERROR", e.getMessage(), getEscenario());
-			}
-		} else {
-			Dialogos.mostrarDialogoError("ERROR", "Todos los campos deben de ser validos", getEscenario());
+
+		try {
+			vistaGrafica.getControlador().insertar(new Alquiler(Cliente.getClienteConDni(tfDni.getText()),
+					Vehiculo.getVehiculoConMatricula(tfMatricula.getText()), dpFechaAlquiler.getValue()));
+			Dialogos.mostrarDialogoInformacion("Insercion correcta", "Alquiler insertado correctamente",
+					getEscenario());
+			((Stage) btInsertar.getParent().getScene().getWindow()).close();
+		} catch (OperationNotSupportedException | IllegalArgumentException e) {
+			Dialogos.mostrarDialogoError("ERROR", e.getMessage(), getEscenario());
 		}
-		
+
 	}
 
 }

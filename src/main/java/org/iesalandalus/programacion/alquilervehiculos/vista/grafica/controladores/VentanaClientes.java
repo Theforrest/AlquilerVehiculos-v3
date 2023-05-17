@@ -8,6 +8,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.VistaGrafica;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controladores;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Dialogos;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controles.FormateadorCeldaFecha;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -22,14 +23,15 @@ import javafx.stage.Stage;
 
 public class VentanaClientes extends Controlador {
 	private VistaGrafica vistaGrafica;
-	
+
 	private static Scene escenaClientes;
-	
+
 	public static void setEscenaPrincipal(Scene escena) {
 		if (escenaClientes == null) {
 			escenaClientes = escena;
-			}
+		}
 	}
+
 	public static Scene getEscenaPrincipal() {
 		return escenaClientes;
 	}
@@ -75,6 +77,8 @@ public class VentanaClientes extends Controlador {
 		tcVehiculo.setCellValueFactory(new PropertyValueFactory<>("vehiculo"));
 		tcFechaAlquiler.setCellValueFactory(new PropertyValueFactory<>("fechaAlquiler"));
 		tcFechaDevolucion.setCellValueFactory(new PropertyValueFactory<>("fechaDevolucion"));
+		tcFechaAlquiler.setCellFactory(cell -> new FormateadorCeldaFecha());
+		tcFechaDevolucion.setCellFactory(cell -> new FormateadorCeldaFecha());
 
 		tvClientes.getSelectionModel().selectedItemProperty()
 				.addListener((ob, oldValue, newValue) -> mostrarAlquileres(newValue));
@@ -85,9 +89,9 @@ public class VentanaClientes extends Controlador {
 		Stage escenario = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		escenario.setScene(VentanaPrincipal.getEscenaPrincipal());
 		escenario.show();
-		
+
 	}
-	
+
 	@FXML
 	private void devolver() {
 		Cliente cliente = null;
@@ -104,8 +108,8 @@ public class VentanaClientes extends Controlador {
 						ventanaDevolverAlquiler.setCliente(cliente);
 						ventanaDevolverAlquiler.getEscenario().showAndWait();
 						tvAlquileres.getItems().clear();
-						tvAlquileres
-						.setItems(FXCollections.observableArrayList(vistaGrafica.getControlador().getAlquileres(cliente)));
+						tvAlquileres.setItems(FXCollections
+								.observableArrayList(vistaGrafica.getControlador().getAlquileres(cliente)));
 						dni = null;
 					} else {
 						Dialogos.mostrarDialogoError("Cliente no encontrado", "No existe ningún cliente con ese DNI",
@@ -116,7 +120,7 @@ public class VentanaClientes extends Controlador {
 				}
 
 			}
-	} while (dni != null);
+		} while (dni != null);
 	}
 
 	@FXML

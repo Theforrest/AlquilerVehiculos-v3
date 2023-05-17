@@ -47,13 +47,37 @@ public class VentanaDevolverAlquiler extends Controlador {
 		cbTipoDevolucion.setValue("Cliente");
 
 		Controles.setInvalido(tfDni);
-		tfDni.textProperty()
-				.addListener((observable, oldValue, newValue) -> Controles.validarCampoTexto(Cliente.ER_DNI, tfDni));
+		tfDni.textProperty().addListener((observable, oldValue, newValue) -> deshabilitarBoton());
 
 		Controles.setInvalido(tfMatricula);
-		tfMatricula.textProperty().addListener(
-				(observable, oldValue, newValue) -> Controles.validarCampoTexto(Vehiculo.ER_MATRICULA, tfMatricula));
+		tfMatricula.textProperty().addListener((observable, oldValue, newValue) -> deshabilitarBoton());
+		dpFechaDevolucion.valueProperty().addListener((observable, oldValue, newValue) -> deshabilitarBoton());
+		btDevolver.setDisable(true);
+	}
 
+	private void deshabilitarBoton() {
+		if (cbTipoDevolucion.getValue().equals("Cliente")) {
+			deshabilitarBoton(Cliente.ER_DNI, tfDni);
+		} else if (cbTipoDevolucion.getValue().equals("Vehiculo")) {
+			deshabilitarBoton(Vehiculo.ER_MATRICULA, tfMatricula);
+		}
+	}
+
+	private void deshabilitarBoton(String er, TextField campoTexto) {
+		Controles.validarCampoTexto(er, campoTexto);
+
+		boolean invalido;
+
+		if (cbTipoDevolucion.getValue().equals("Cliente")) {
+			invalido = !(cbTipoDevolucion.getValue().equals("Cliente") && tfDni.getStyleClass().contains("valido")
+					&& dpFechaDevolucion.getValue() != null);
+			btDevolver.setDisable(invalido);
+		} else if (cbTipoDevolucion.getValue().equals("Vehiculo")) {
+			invalido = !(cbTipoDevolucion.getValue().equals("Vehiculo")
+					&& tfMatricula.getStyleClass().contains("valido") && dpFechaDevolucion.getValue() != null);
+
+			btDevolver.setDisable(invalido);
+		}
 	}
 
 	@FXML
@@ -75,8 +99,7 @@ public class VentanaDevolverAlquiler extends Controlador {
 	@FXML
 	private void devolver() {
 
-		if (cbTipoDevolucion.getValue().equals("Cliente") && tfDni.getStyleClass().contains("valido")
-				&& dpFechaDevolucion.getValue() != null) {
+		if (cbTipoDevolucion.getValue().equals("Cliente")) {
 			try {
 				vistaGrafica.getControlador().devolver(Cliente.getClienteConDni(tfDni.getText()),
 						dpFechaDevolucion.getValue());
@@ -86,8 +109,7 @@ public class VentanaDevolverAlquiler extends Controlador {
 			} catch (OperationNotSupportedException | IllegalArgumentException e) {
 				Dialogos.mostrarDialogoError("ERROR", e.getMessage(), getEscenario());
 			}
-		} else if (cbTipoDevolucion.getValue().equals("Vehiculo") && tfMatricula.getStyleClass().contains("valido")
-				&& dpFechaDevolucion.getValue() != null) {
+		} else if (cbTipoDevolucion.getValue().equals("Vehiculo")) {
 			try {
 				vistaGrafica.getControlador().devolver(Vehiculo.getVehiculoConMatricula(tfMatricula.getText()),
 						dpFechaDevolucion.getValue());
@@ -98,8 +120,6 @@ public class VentanaDevolverAlquiler extends Controlador {
 				Dialogos.mostrarDialogoError("ERROR", e.getMessage(), getEscenario());
 			}
 
-		} else {
-			Dialogos.mostrarDialogoError("ERROR", "Todos los campos deben de ser validos", getEscenario());
 		}
 
 	}

@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores;
 
-import java.time.LocalDate;  
+import java.time.LocalDate;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -33,8 +33,10 @@ public class VentanaBuscarAlquiler extends Controlador {
 	private void initialize() {
 		// Inicializando la vista
 		vistaGrafica = VistaGrafica.getInstancia();
-		
+
 	}
+	
+
 
 	@FXML
 	private void cerrar() {
@@ -52,15 +54,12 @@ public class VentanaBuscarAlquiler extends Controlador {
 
 	}
 
-	
-
 	@FXML
 	private void borrar() {
 
 		try {
 			vistaGrafica.getControlador().borrar(alquiler);
-			Dialogos.mostrarDialogoInformacion("Borrado correcto", "Alquiler borrado correctamente",
-					getEscenario());
+			Dialogos.mostrarDialogoInformacion("Borrado correcto", "Alquiler borrado correctamente", getEscenario());
 			cerrar();
 		} catch (OperationNotSupportedException | IllegalArgumentException e) {
 			Dialogos.mostrarDialogoError("ERROR", e.getMessage(), getEscenario());
